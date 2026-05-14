@@ -3,7 +3,6 @@ import os
 import joblib
 import numpy as np
 import pandas as pd
-import mlflow
 
 st.set_page_config(page_title="Fraud Detector", page_icon="🔍", layout="wide")
 
@@ -14,6 +13,7 @@ FRAUD_THRESHOLD = float(os.environ.get("FRAUD_THRESHOLD", "0.45"))
 @st.cache_resource
 def load_model():
     if APP_MODE == "mlflow":
+        import mlflow
         mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
         model = mlflow.xgboost.load_model("models:/FraudDetectionXGB/Production")
         scaler = joblib.load("scaler.pkl")
