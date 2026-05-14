@@ -12,6 +12,7 @@ FRAUD_THRESHOLD = float(os.environ.get("FRAUD_THRESHOLD", "0.45"))
 
 @st.cache_resource
 def load_model():
+    # Cache busted to force loading the corrected model.json
     if APP_MODE == "mlflow":
         import mlflow
         mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
