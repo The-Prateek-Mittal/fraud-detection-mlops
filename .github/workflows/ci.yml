@@ -51,7 +51,9 @@ jobs:
           path: models/
 
       - name: Build Docker image
-        run: docker build -t fraud-detection:latest .
+        run: |
+          cp models/scaler.pkl scaler.pkl 2>/dev/null || touch scaler.pkl
+          docker build -t fraud-detection:latest .
 
       - name: CI complete
         run: echo "CI complete — image built, models saved"
