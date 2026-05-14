@@ -1,0 +1,14 @@
+data/
+__pycache__/
+/*.pkl
+mlruns/
+*.pem
+.env
+mlflow.db
+mlflow-artifacts/
+.minikube/
+scaler.pkl
+
+# Keep models for Streamlit Cloud
+!models/model.json
+!models/scaler.pkl
