@@ -18,6 +18,10 @@ def load_model():
         model = mlflow.xgboost.load_model("models:/FraudDetectionXGB/Production")
         scaler = joblib.load("scaler.pkl")
     else:  # local mode for Streamlit Cloud
+        if not os.path.exists("models/model.json") or not os.path.exists("models/scaler.pkl"):
+            st.error("Model files not found! 🚀 Please train the model locally using `python src/train.py` and push the `models/` folder to GitHub.")
+            st.stop()
+            
         from xgboost import XGBClassifier
         model = XGBClassifier()
         model.load_model("models/model.json")
